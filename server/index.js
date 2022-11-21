@@ -6,15 +6,6 @@ require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-// let origin1;
-// if (process.env.NODE_ENV === "development") {
-//   console.log("hello");
-//   origin1 = "localhost:3000";
-// } else {
-//   origin1 = process.env.ALLOWED_ORIGIN;
-// }
-
-// console.log("origin1:", origin1);
 
 app.use(express.json());
 app.use(
