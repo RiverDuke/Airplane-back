@@ -10,7 +10,7 @@ console.log("testing:", process.env.TEST);
 app.use(express.json());
 
 let corsOptions = {
-  origin: [process.env.ALLOWED_ORIGIN, "http://localhost:3000"],
+  origin: ["https://airplane-front.uk.r.appspot.com", "http://localhost:3000"],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
