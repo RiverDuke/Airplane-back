@@ -8,11 +8,19 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 console.log("testing:", process.env.TEST);
 app.use(express.json());
-app.use(
-  cors({
-    origin: [process.env.ALLOWED_ORIGIN, "http://localhost:3000"],
-  })
-);
+
+let corsOptions = {
+  origin: [process.env.ALLOWED_ORIGIN, "http://localhost:3000"],
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+// app.use(
+//   cors({
+//     origin: [process.env.ALLOWED_ORIGIN, "http://localhost:3000"],
+//   })
+// );
+
+app.use(cors(corsOptions));
 
 app.get("/api", async (req, res) => {
   const data = await knex("testing").select("*");
