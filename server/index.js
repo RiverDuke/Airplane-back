@@ -24,6 +24,10 @@ app.get("/api", async (req, res) => {
   });
 });
 
+app.get("/test", (req, res) => {
+  res.send("HELLO");
+});
+
 app.get("*", (req, res) => {
   res.json({ message: "Path not found" });
 });
