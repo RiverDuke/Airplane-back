@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const knex = require("./db/connection");
+const loginRouter = require("./login/login.router");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
@@ -14,12 +15,6 @@ let corsOptions = {
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-// app.use(
-//   cors({
-//     origin: [process.env.ALLOWED_ORIGIN, "http://localhost:3000"],
-//   })
-// );
-
 app.use(cors(corsOptions));
 
 app.get("/api", async (req, res) => {
@@ -31,6 +26,8 @@ app.get("/api", async (req, res) => {
     data,
   });
 });
+
+app.use("/login", loginRouter);
 
 app.get("/test", (req, res) => {
   res.send("HELLO");
