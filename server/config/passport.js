@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const knex = require("./database");
-const validPassword = require("../utils/passUtils");
+const validPassword = require("../utils/passUtils").validPassword;
 
 const customFields = {
   usernameField: "email",
@@ -20,6 +20,8 @@ const verifyCallback = (username, password, done) => {
 
       const isValid = validPassword(password, user.hash, user.salt);
 
+      console.log("userIsValid:", isValid);
+
       if (isValid) {
         return done(null, user);
       } else {
@@ -36,7 +38,8 @@ const strategy = new LocalStrategy(customFields, verifyCallback);
 passport.use(strategy);
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  console.log("serialUser", user);
+  done(null, user.userId);
 });
 
 passport.deserializeUser((userId, done) => {

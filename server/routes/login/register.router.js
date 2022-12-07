@@ -5,16 +5,21 @@ const knex = require("../../config/database");
 const isAuth = require("../authMiddleware").isAuth;
 const isAdmin = require("../authMiddleware").isAdmin;
 
-router.route("/").post(passport.authenticate("local"), (req, res, next) => {
+router.route("/").post((req, res, next) => {
+  const saltHash = genPassword(req.body.password);
+  console.log(saltHash);
   console.log(req.body);
-  console.log("HMM It worked your logged in");
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-  });
-  console.log("youve been logged out");
-  res.json({ data: "youve been logged out" });
+  console.log("registerRouter");
+
+  const newUser = {
+    username: req.body.email,
+    hash: saltHash.hash,
+    salt: saltHash.salt,
+  };
+
+  knex("users")
+    .insert(newUser, "*")
+    .then((data) => console.log(data[0]));
 });
 
 module.exports = router;
