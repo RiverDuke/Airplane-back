@@ -11,6 +11,7 @@ require("dotenv").config();
 require("./config/passport");
 const cors = require("cors");
 const loginRouter = require("./routes/login/login.router");
+const registerRouter = require("./routes/login/register.router");
 
 const corsOptions = {
   origin: ["https://airplane-front.uk.r.appspot.com", "http://localhost:3000"],
@@ -40,6 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/login", loginRouter);
+app.use("/register", registerRouter);
 
 app.get("/test", (req, res) => {
   res.send("HELLO");
