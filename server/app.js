@@ -8,6 +8,7 @@ const passport = require("passport");
 const crypto = require("crypto");
 const app = express();
 require("dotenv").config();
+require("./config/passport");
 const cors = require("cors");
 const loginRouter = require("./routes/login/login.router");
 
@@ -35,6 +36,8 @@ const sessionOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(session(sessionOptions));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/login", loginRouter);
 
