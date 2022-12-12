@@ -16,6 +16,7 @@ const registerRouter = require("./routes/login/register.router");
 const corsOptions = {
   origin: ["https://airplane-front.uk.r.appspot.com", "http://localhost:3000"],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true,
 };
 
 const sessionOptions = {
@@ -42,10 +43,6 @@ app.use(passport.session());
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
-
-app.get("/test", (req, res) => {
-  res.send("HELLO");
-});
 
 app.get("*", (req, res) => {
   res.json({ message: "Path not found" });
