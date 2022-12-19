@@ -20,4 +20,11 @@ router.route("/test").get(isAuth, (req, res, next) => {
   res.json({ data: "you are authorized" });
 });
 
+router.route("/logout").get((req, res, next) => {
+  console.log(req.session);
+  req.logout((err) => {
+    if (err) return next(err);
+    console.log("Youve been logged out");
+  });
+});
 module.exports = router;
