@@ -19,7 +19,10 @@ router.route("/").post((req, res, next) => {
 
   knex("users")
     .insert(newUser, "*")
-    .then((data) => console.log(data[0]));
+    .then((data) => {
+      console.log(data[0]);
+      // done(null, data[0]);
+    });
 });
 
 module.exports = router;
