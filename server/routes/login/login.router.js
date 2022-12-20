@@ -17,7 +17,7 @@ router.route("/").post(passport.authenticate("local"), (req, res, next) => {
 });
 
 router.route("/test").get(isAuth, (req, res, next) => {
-  res.json({ data: "you are authorized" });
+  res.json({ authorized: true });
 });
 
 router.route("/logout").get((req, res, next) => {
@@ -26,5 +26,6 @@ router.route("/logout").get((req, res, next) => {
     if (err) return next(err);
     console.log("Youve been logged out");
   });
+  res.json({ msg: "user logged out" });
 });
 module.exports = router;
