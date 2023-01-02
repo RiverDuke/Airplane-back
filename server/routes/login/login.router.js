@@ -2,8 +2,8 @@ const router = require("express").Router();
 const passport = require("passport");
 const genPassword = require("../../utils/passUtils").genPassword;
 const knex = require("../../config/database");
-const isAuth = require("../authMiddleware").isAuth;
-const isAdmin = require("../authMiddleware").isAdmin;
+const isAuth = require("../../utils/authMiddleware").isAuth;
+const isAdmin = require("../../utils/authMiddleware").isAdmin;
 
 router.route("/").post(passport.authenticate("local"), (req, res, next) => {
   // req.logout((err) => {
