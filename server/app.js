@@ -12,6 +12,9 @@ require("./config/passport");
 const cors = require("cors");
 const loginRouter = require("./routes/login/login.router");
 const registerRouter = require("./routes/login/register.router");
+const articles = require("./routes/articles/addArticles.router");
+const errorHandler = require("./errors/errorHandler");
+const notFound = require("./errors/notFound");
 
 const corsOptions = {
   origin: ["https://airplane-front.uk.r.appspot.com", "http://localhost:3000"],
@@ -43,10 +46,10 @@ app.use(passport.session());
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+app.use("/articles", articles);
 
-app.get("*", (req, res) => {
-  res.json({ message: "Path not found" });
-});
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
